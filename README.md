@@ -13,7 +13,8 @@ A code repository for deploying distilled versions of DeepSeek-R1 on SageMaker a
 
 ## 🏗️ Architecture
 
-![arch]()
+![arch](https://github.com/user-attachments/assets/7d170170-52af-4786-b14f-7843e14208af)
+
 
 ## 🚀 Deployment Methods
 
