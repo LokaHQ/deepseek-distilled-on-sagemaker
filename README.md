@@ -57,7 +57,7 @@ This method involves using code to deploy the DeepSeek models on AWS SageMaker.
     - Edit the `.env` file with your preferred text editor and fill in the required values:
     ```bash
     hf_model_id = "deepseek-ai/DeepSeek-R1-Distill-Llama-8B"
-    role_arn = 'arn:aws:iam::396587179375:role/service-role/AmazonSageMaker-ExecutionRole-1234567688123'
+    role_arn = 'arn:aws:iam::123456789012:role/service-role/AmazonSageMaker-ExecutionRole-12345678901234'
     region_info = 'us-west-2'
     instance_type = 'ml.g6.2xlarge'
     initial_instance_count = 1
