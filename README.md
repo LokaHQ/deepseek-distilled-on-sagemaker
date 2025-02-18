@@ -13,7 +13,7 @@ A code repository for deploying distilled versions of DeepSeek-R1 on SageMaker a
 
 ## 🏗️ Architecture
 
-![arch](https://github.com/user-attachments/assets/a8c999fa-8cac-4063-bedd-b5b49515c2c0)
+![arch](https://github.com/user-attachments/assets/7d170170-52af-4786-b14f-7843e14208af)
 
 
 ## 🚀 Deployment Methods
@@ -103,8 +103,8 @@ This method involves using code to deploy the DeepSeek models on AWS SageMaker.
 | deepseek-ai/DeepSeek-R1-Distill-Llama-70B  | ml.g6.48xlarge  | 8                     |
 | deepseek-ai/DeepSeek-R1-Distill-Qwen-32B   | ml.g6.12xlarge  | 4                     |
 | deepseek-ai/DeepSeek-R1-Distill-Qwen-14B   | ml.g6.12xlarge  | 4                     |
-| deepseek-ai/DeepSeek-R1-Distill-Llama-8B   | ml.g6.2xlarge   | 1                     |
-| deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    | ml.g6.2xlarge   | 1                     |
+| deepseek-ai/DeepSeek-R1-Distill-Llama-8B   | ml.g6.4xlarge   | 1                     |
+| deepseek-ai/DeepSeek-R1-Distill-Qwen-7B    | ml.g6.4xlarge   | 1                     |
 | deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B  | ml.g6.2xlarge   | 1                     |
 
 ## 📂 Repo Structure
@@ -124,3 +124,4 @@ This method involves using code to deploy the DeepSeek models on AWS SageMaker.
 ├── pyproject.toml
 ├── README.md
 └── uv.lock
+```

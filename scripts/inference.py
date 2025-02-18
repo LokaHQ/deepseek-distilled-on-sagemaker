@@ -1,6 +1,7 @@
 """Inference script for the AWS SageMaker model"""
 
 import argparse
+import time
 
 from dotenv import load_dotenv
 from loguru import logger
@@ -16,6 +17,7 @@ def generate(
     max_new_tokens=128,
     top_k=50,
     top_p=0.95,
+    max_retries=10,
 ) -> dict:
     """
     Generate response using the SageMaker model
@@ -27,27 +29,36 @@ def generate(
         max_new_tokens (int): Maximum number of tokens to generate
         top_k (int): Top-K sampling parameter
         top_p (float): Nucleus sampling parameter (0.0-1.0)
+        max_retries (int): Maximum number of retry attempts
 
     Returns:
         dict: Response from the model
     """
     logger.info("Generating response using the model")
 
-    response = predictor.predict(
-        {
-            "inputs": prompt,
-            "parameters": {
-                "do_sample": True,
-                "max_new_tokens": max_new_tokens,
-                "temperature": temperature,
-                "top_k": top_k,
-                "top_p": top_p,
-            },
-        }
-    )
-
-    logger.info("Response generated successfully")
-    return response
+    attempt = 0
+    while attempt < max_retries:a
+        try:
+            response = predictor.predict(
+                {
+                    "inputs": prompt,
+                    "parameters": {
+                        "do_sample": True,
+                        "max_new_tokens": max_new_tokens,
+                        "temperature": temperature,
+                        "top_k": top_k,
+                        "top_p": top_p,
+                    },
+                }
+            )
+            logger.info("Response generated successfully")
+            return response
+        except Exception as e:
+            logger.error(f"Attempt {attempt + 1} failed: {str(e)}")
+            attempt += 1
+            if attempt < max_retries:
+                time.sleep(30)
+    raise Exception("Failed to get response after maximum retries")
 
 
 if __name__ == "__main__":
@@ -83,6 +94,9 @@ if __name__ == "__main__":
     parser.add_argument(
         "--top_p", type=float, default=0.95, help="Nucleus sampling parameter (0.0-1.0)"
     )
+    parser.add_argument(
+        "--max_retries", type=int, default=10, help="Maximum number of retry attempts"
+    )
 
     args = parser.parse_args()
 
@@ -97,5 +111,6 @@ if __name__ == "__main__":
         max_new_tokens=args.max_new_tokens,
         top_k=args.top_k,
         top_p=args.top_p,
+        max_retries=args.max_retries,
     )
     logger.info(f"Generated text: {response[0]['generated_text']}")
